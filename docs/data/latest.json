@@ -1,0 +1,119 @@
+{
+  "ok": true,
+  "data": {
+    "query": {
+      "from": {
+        "code": "CTU",
+        "name": "CTU"
+      },
+      "to": {
+        "code": "CTU",
+        "name": "CTU"
+      },
+      "depart_dates": [
+        "2026-10-17"
+      ],
+      "return_dates": [
+        "2026-10-17"
+      ],
+      "platforms": [
+        "qunar",
+        "tongcheng"
+      ],
+      "threshold": 0,
+      "query_time": "2026-10-09 06:00:02"
+    },
+    "results": [
+      {
+        "platform": "tongcheng",
+        "from": "CTU",
+        "to": "FOC",
+        "date": "2026-10-17",
+        "price": 480.0,
+        "airline": "",
+        "flight_no": "",
+        "depart_time": "",
+        "arrive_time": "",
+        "fetched_at": "2026-10-09 05:58:40"
+      },
+      {
+        "platform": "qunar",
+        "from": "XMN",
+        "to": "CTU",
+        "date": "2026-10-25",
+        "price": 554.0,
+        "airline": "",
+        "flight_no": "",
+        "depart_time": "",
+        "arrive_time": "",
+        "fetched_at": "2026-10-09 05:59:35"
+      },
+      {
+        "platform": "tongcheng",
+        "from": "XMN",
+        "to": "CTU",
+        "date": "2026-10-25",
+        "price": 640.0,
+        "airline": "",
+        "flight_no": "",
+        "depart_time": "",
+        "arrive_time": "",
+        "fetched_at": "2026-10-09 06:00:02"
+      }
+    ],
+    "summary": [
+      {
+        "from": "CTU",
+        "to": "FOC",
+        "date": "2026-10-17",
+        "per_platform": {
+          "tongcheng": 480.0
+        },
+        "min_price": 480.0,
+        "best_platform": "tongcheng",
+        "best_flight": "",
+        "best_depart_time": "",
+        "best_arrive_time": ""
+      },
+      {
+        "from": "XMN",
+        "to": "CTU",
+        "date": "2026-10-25",
+        "per_platform": {
+          "qunar": 554.0,
+          "tongcheng": 640.0
+        },
+        "min_price": 554.0,
+        "best_platform": "qunar",
+        "best_flight": "",
+        "best_depart_time": "",
+        "best_arrive_time": ""
+      }
+    ],
+    "trend": {
+      "CTU-FOC|2026-10-17": {
+        "tongcheng": [
+          {
+            "t": "2026-10-09 05:58:40",
+            "v": 480.0
+          }
+        ]
+      },
+      "XMN-CTU|2026-10-25": {
+        "qunar": [
+          {
+            "t": "2026-10-09 05:59:35",
+            "v": 554.0
+          }
+        ],
+        "tongcheng": [
+          {
+            "t": "2026-10-09 06:00:02",
+            "v": 640.0
+          }
+        ]
+      }
+    },
+    "generated_at": "2026-10-09T06:00:14.204781Z"
+  }
+}
