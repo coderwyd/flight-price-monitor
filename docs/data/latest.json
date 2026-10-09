@@ -3,23 +3,25 @@
   "data": {
     "query": {
       "from": {
-        "code": "XMN",
-        "name": "XMN"
+        "code": "CTU",
+        "name": "CTU"
       },
       "to": {
-        "code": "FOC",
-        "name": "FOC"
+        "code": "CTU",
+        "name": "CTU"
       },
       "depart_dates": [
-        "2026-10-25"
+        "2026-10-17"
       ],
-      "return_dates": [],
+      "return_dates": [
+        "2026-10-17"
+      ],
       "platforms": [
         "qunar",
         "tongcheng"
       ],
       "threshold": 0,
-      "query_time": "2026-10-09 13:07:57"
+      "query_time": "2026-10-09 19:23:55"
     },
     "results": [
       {
@@ -32,19 +34,19 @@
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-09 13:06:20"
+        "fetched_at": "2026-10-09 19:22:34"
       },
       {
         "platform": "qunar",
         "from": "XMN",
         "to": "CTU",
         "date": "2026-10-25",
-        "price": 589.0,
+        "price": 639.0,
         "airline": "",
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-09 13:07:30"
+        "fetched_at": "2026-10-09 19:23:36"
       },
       {
         "platform": "tongcheng",
@@ -56,7 +58,7 @@
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-09 13:07:57"
+        "fetched_at": "2026-10-09 19:23:55"
       }
     ],
     "summary": [
@@ -78,10 +80,10 @@
         "to": "CTU",
         "date": "2026-10-25",
         "per_platform": {
-          "qunar": 589.0,
+          "qunar": 639.0,
           "tongcheng": 640.0
         },
-        "min_price": 589.0,
+        "min_price": 639.0,
         "best_platform": "qunar",
         "best_flight": "",
         "best_depart_time": "",
@@ -98,6 +100,10 @@
           {
             "t": "2026-10-09 13:06:20",
             "v": 420.0
+          },
+          {
+            "t": "2026-10-09 19:22:34",
+            "v": 420.0
           }
         ]
       },
@@ -110,6 +116,10 @@
           {
             "t": "2026-10-09 13:07:30",
             "v": 589.0
+          },
+          {
+            "t": "2026-10-09 19:23:36",
+            "v": 639.0
           }
         ],
         "tongcheng": [
@@ -120,10 +130,14 @@
           {
             "t": "2026-10-09 13:07:57",
             "v": 640.0
+          },
+          {
+            "t": "2026-10-09 19:23:55",
+            "v": 640.0
           }
         ]
       }
     },
-    "generated_at": "2026-10-09T13:08:02.921739Z"
+    "generated_at": "2026-10-09T19:24:03.224686Z"
   }
 }
