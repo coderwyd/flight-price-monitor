@@ -2,42 +2,9 @@ name: Flight Price Monitor
 
 on:
   schedule:
-    # 每天 01:00 / 07:00 / 13:00 / 19:00 UTC（北京时间 09/15/21/03 点）
-    - cron: '0 1,7,13,19 * * *'
+    # 每小时整点运行一次
+    - cron: '0 * * * *'
   workflow_dispatch:
-    inputs:
-      from_code:
-        description: '出发地三字码 (如 LZO)'
-        required: true
-        default: 'LZO'
-      from_name:
-        description: '出发地名称 (如 泸州)'
-        required: true
-        default: '泸州'
-      to_code:
-        description: '目的地三字码 (如 BJS)'
-        required: true
-        default: 'BJS'
-      to_name:
-        description: '目的地名称 (如 北京)'
-        required: true
-        default: '北京'
-      depart_dates:
-        description: '去程日期, 逗号分隔 (如 2026-09-30,2026-10-01)'
-        required: true
-        default: '2026-09-30,2026-10-01,2026-10-02'
-      return_dates:
-        description: '回程日期, 逗号分隔 (可选)'
-        required: false
-        default: '2026-10-06'
-      platforms:
-        description: '平台: fliggy,tuniu,qunar,tongcheng,ctrip'
-        required: false
-        default: 'fliggy,tuniu,qunar,tongcheng'
-      threshold:
-        description: '低价提醒阈值（元）'
-        required: false
-        default: '0'
 
 permissions:
   contents: write
@@ -62,23 +29,67 @@ jobs:
           pip install -r requirements.txt
           python -m playwright install chromium --with-deps
 
-      - name: Build config from workflow_dispatch or defaults
+      - name: Build config (multi-route)
+        env:
+          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
         run: |
-          python scripts/build_config.py \
-            --from-code "${{ github.event.inputs.from_code || 'LZO' }}" \
-            --from-name "${{ github.event.inputs.from_name || '泸州' }}" \
-            --to-code "${{ github.event.inputs.to_code || 'BJS' }}" \
-            --to-name "${{ github.event.inputs.to_name || '北京' }}" \
-            --dates "${{ github.event.inputs.depart_dates || '2026-09-30,2026-10-01,2026-10-02' }}" \
-            --return-dates "${{ github.event.inputs.return_dates || '2026-10-06' }}" \
-            --platforms "${{ github.event.inputs.platforms || 'fliggy,tuniu,qunar,tongcheng' }}" \
-            --threshold "${{ github.event.inputs.threshold || '0' }}" \
-            --serverchan-key "${{ secrets.SERVERCHAN_KEY }}" \
-            --output config.yaml
+          cat > config.yaml <<EOF
+          routes:
+            - from: CTU
+              from_name: 成都
+              to: FOC
+              to_name: 福州
+              dates:
+                - "2026-10-17"
+              alert_threshold: 579
+
+            - from: XMN
+              from_name: 厦门
+              to: CTU
+              to_name: 成都
+              dates:
+                - "2026-10-25"
+              alert_threshold: 579
+
+          platforms:
+            - fliggy
+            - qunar
+            - tongcheng
+
+          schedule:
+            interval_minutes: 999
+            jitter_minutes: 0
+            run_on_start: true
+
+          crawler:
+            headless: true
+            timeout_seconds: 45
+            delay_min: 5
+            delay_max: 15
+            user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+            mobile_user_agent: ""
+            debug: false
+            debug_dir: debug
+            user_data_dir: user_data
+
+          output:
+            db_path: data/prices.db
+            log_path: logs/monitor.log
+
+          notifier:
+            push_drop_min: 30
+            push_rise_min: 50
+            serverchan:
+              enabled: true
+              send_key: "${SERVERCHAN_KEY}"
+              channel: ""
+          EOF
+          echo "--- routes in generated config ---"
+          grep -E 'from:|to:|alert_threshold:' config.yaml
 
       - name: Run price monitor (one round)
         run: python main.py --once
-        timeout-minutes: 15
+        timeout-minutes: 25
 
       - name: Export latest results to JSON
         run: |
@@ -95,8 +106,24 @@ jobs:
 
       - name: Commit data & report
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data/
-          git diff --staged --quiet || git commit -m "chore: update price data $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push
+          # data/prices.db 一并提交：历史价格需跨运行保留，
+          # 否则走势图只有单点、推送去抖也会失效（每轮都当成首次推送）
+          git add docs/data/ data/prices.db
+          if git diff --staged --quiet; then
+            echo "无变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "chore: update price data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          # 定时任务与手动触发可能撞车，push 被拒时 rebase 后重试，
+          # 冲突时以本轮结果为准（-X ours）
+          for i in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push 被拒，rebase 后重试（第 $i 次）"
+            git pull --rebase -X ours origin main || { git rebase --abort || true; break; }
+          done
+          echo "push 重试 3 次仍失败" >&2
+          exit 1
