@@ -3,25 +3,23 @@
   "data": {
     "query": {
       "from": {
-        "code": "CTU",
-        "name": "CTU"
+        "code": "XMN",
+        "name": "XMN"
       },
       "to": {
-        "code": "CTU",
-        "name": "CTU"
+        "code": "FOC",
+        "name": "FOC"
       },
       "depart_dates": [
-        "2026-10-17"
+        "2026-10-25"
       ],
-      "return_dates": [
-        "2026-10-17"
-      ],
+      "return_dates": [],
       "platforms": [
         "qunar",
         "tongcheng"
       ],
       "threshold": 0,
-      "query_time": "2026-10-09 06:00:02"
+      "query_time": "2026-10-09 13:07:57"
     },
     "results": [
       {
@@ -29,24 +27,24 @@
         "from": "CTU",
         "to": "FOC",
         "date": "2026-10-17",
-        "price": 480.0,
+        "price": 420.0,
         "airline": "",
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-09 05:58:40"
+        "fetched_at": "2026-10-09 13:06:20"
       },
       {
         "platform": "qunar",
         "from": "XMN",
         "to": "CTU",
         "date": "2026-10-25",
-        "price": 554.0,
+        "price": 589.0,
         "airline": "",
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-09 05:59:35"
+        "fetched_at": "2026-10-09 13:07:30"
       },
       {
         "platform": "tongcheng",
@@ -58,7 +56,7 @@
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-09 06:00:02"
+        "fetched_at": "2026-10-09 13:07:57"
       }
     ],
     "summary": [
@@ -67,9 +65,9 @@
         "to": "FOC",
         "date": "2026-10-17",
         "per_platform": {
-          "tongcheng": 480.0
+          "tongcheng": 420.0
         },
-        "min_price": 480.0,
+        "min_price": 420.0,
         "best_platform": "tongcheng",
         "best_flight": "",
         "best_depart_time": "",
@@ -80,10 +78,10 @@
         "to": "CTU",
         "date": "2026-10-25",
         "per_platform": {
-          "qunar": 554.0,
+          "qunar": 589.0,
           "tongcheng": 640.0
         },
-        "min_price": 554.0,
+        "min_price": 589.0,
         "best_platform": "qunar",
         "best_flight": "",
         "best_depart_time": "",
@@ -96,6 +94,10 @@
           {
             "t": "2026-10-09 05:58:40",
             "v": 480.0
+          },
+          {
+            "t": "2026-10-09 13:06:20",
+            "v": 420.0
           }
         ]
       },
@@ -104,16 +106,24 @@
           {
             "t": "2026-10-09 05:59:35",
             "v": 554.0
+          },
+          {
+            "t": "2026-10-09 13:07:30",
+            "v": 589.0
           }
         ],
         "tongcheng": [
           {
             "t": "2026-10-09 06:00:02",
             "v": 640.0
+          },
+          {
+            "t": "2026-10-09 13:07:57",
+            "v": 640.0
           }
         ]
       }
     },
-    "generated_at": "2026-10-09T06:00:14.204781Z"
+    "generated_at": "2026-10-09T13:08:02.921739Z"
   }
 }
