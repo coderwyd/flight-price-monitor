@@ -7,19 +7,21 @@
         "name": "XMN"
       },
       "to": {
-        "code": "FOC",
-        "name": "FOC"
+        "code": "CTU",
+        "name": "CTU"
       },
       "depart_dates": [
         "2026-10-25"
       ],
-      "return_dates": [],
+      "return_dates": [
+        "2026-10-17"
+      ],
       "platforms": [
         "qunar",
         "tongcheng"
       ],
       "threshold": 0,
-      "query_time": "2026-10-11 18:45:48"
+      "query_time": "2026-10-11 22:47:16"
     },
     "results": [
       {
@@ -32,7 +34,7 @@
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-11 18:44:18"
+        "fetched_at": "2026-10-11 22:46:00"
       },
       {
         "platform": "qunar",
@@ -44,7 +46,7 @@
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-11 18:45:28"
+        "fetched_at": "2026-10-11 22:46:55"
       },
       {
         "platform": "tongcheng",
@@ -56,7 +58,7 @@
         "flight_no": "",
         "depart_time": "",
         "arrive_time": "",
-        "fetched_at": "2026-10-11 18:45:48"
+        "fetched_at": "2026-10-11 22:47:16"
       }
     ],
     "summary": [
@@ -138,6 +140,10 @@
           {
             "t": "2026-10-11 18:44:18",
             "v": 550.0
+          },
+          {
+            "t": "2026-10-11 22:46:00",
+            "v": 550.0
           }
         ]
       },
@@ -190,6 +196,10 @@
           {
             "t": "2026-10-11 18:45:28",
             "v": 589.0
+          },
+          {
+            "t": "2026-10-11 22:46:55",
+            "v": 589.0
           }
         ],
         "tongcheng": [
@@ -240,10 +250,14 @@
           {
             "t": "2026-10-11 18:45:48",
             "v": 640.0
+          },
+          {
+            "t": "2026-10-11 22:47:16",
+            "v": 640.0
           }
         ]
       }
     },
-    "generated_at": "2026-10-11T18:46:02.662445Z"
+    "generated_at": "2026-10-11T22:47:22.399700Z"
   }
 }
